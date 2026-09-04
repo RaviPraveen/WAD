@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://a2wtech.lk/sitemap.xml
+Sitemap: https://wad-bay.vercel.app/sitemap.xml
