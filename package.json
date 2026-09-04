@@ -1,7 +1,7 @@
 {
-  "name": "wad-tech",
+  "name": "a2wtech",
   "version": "1.0.0",
-  "description": "WAD Tech - Web App Development Technology official website",
+  "description": "a2wtech (App to Web Technologies) - Official Website",
   "type": "module",
   "scripts": {},
   "repository": {
@@ -9,12 +9,13 @@
     "url": "git+https://github.com/RaviPraveen/WAD.git"
   },
   "keywords": [
-    "wad",
-    "wad-tech",
+    "a2wtech",
+    "a2w-tech",
+    "app-to-web-technologies",
     "web-development",
     "software"
   ],
-  "author": "WAD Tech (Private) Limited",
+  "author": "a2wtech (App to Web Technologies)",
   "license": "ISC",
   "dependencies": {
     "@vercel/analytics": "^2.0.1"

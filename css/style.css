@@ -1,5 +1,5 @@
 /* ==========================================================================
-   WAD TECH — Enterprise Software Development Company
+   a2wtech (App to Web Technologies) — Enterprise Software Development Company
    Design System & Master Stylesheet
    Theme: Premium Clean Light SaaS with Deep Blue & Slate Accents
    ========================================================================== */
@@ -1431,7 +1431,7 @@ ul, ol {
   line-height: 1.55;
 }
 
-/* ---------------- Why Choose WAD Tech ---------------- */
+/* ---------------- Why Choose a2wtech ---------------- */
 .why-choose-layout {
   display: grid;
   grid-template-columns: 1fr 1.3fr;

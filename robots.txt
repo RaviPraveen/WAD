@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wadtech.lk/sitemap.xml
+Sitemap: https://a2wtech.lk/sitemap.xml

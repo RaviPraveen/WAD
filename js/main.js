@@ -1,5 +1,5 @@
 /**
- * WAD TECH — Enterprise Software Development Portal
+ * a2wtech (App to Web Technologies) — Enterprise Software Development Portal
  * Core JavaScript Logic & Interactivity
  */
 
@@ -347,7 +347,7 @@ window.inquireFromModal = function(projectName) {
 
   const projectDescField = document.getElementById('projectDescription');
   if (projectDescField) {
-    projectDescField.value = `Hello WAD Tech, I am interested in building a solution similar to ${projectName}. Please get in touch to discuss requirements and quotation.`;
+    projectDescField.value = `Hello a2wtech, I am interested in building a solution similar to ${projectName}. Please get in touch to discuss requirements and quotation.`;
   }
 
   const contactSection = document.getElementById('contact');
@@ -548,7 +548,7 @@ function initContactForm() {
       successBanner.innerHTML = `
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
         <div>
-          <strong>Message Received!</strong> We just received your mail. Thank you for reaching out to WAD Tech — we will reach you soon!
+          <strong>Message Received!</strong> We just received your mail. Thank you for reaching out to a2wtech — we will reach you soon!
         </div>
       `;
       successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -600,7 +600,7 @@ function initContactForm() {
           message: cDesc
         };
 
-        // 1. Send inquiry email to WAD Tech
+        // 1. Send inquiry email to a2wtech
         emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
           .then(() => {
             // 2. Also send client auto-reply if configured
