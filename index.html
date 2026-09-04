@@ -1298,11 +1298,18 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="js/main.js"></script>
 
-  <!-- Vercel Web Analytics -->
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  <!-- Vercel Web Analytics (@vercel/analytics inject) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "@vercel/analytics": "./js/vercel-analytics.js"
+      }
+    }
   </script>
-  <script defer src="/_vercel/insights/script.js"></script>
+  <script type="module">
+    import { inject } from "@vercel/analytics";
+    inject();
+  </script>
 
   <!-- Vercel Speed Insights -->
   <script>

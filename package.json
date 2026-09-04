@@ -1,0 +1,22 @@
+{
+  "name": "wad-tech",
+  "version": "1.0.0",
+  "description": "WAD Tech - Web App Development Technology official website",
+  "type": "module",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaviPraveen/WAD.git"
+  },
+  "keywords": [
+    "wad",
+    "wad-tech",
+    "web-development",
+    "software"
+  ],
+  "author": "WAD Tech (Private) Limited",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
