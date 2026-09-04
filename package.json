@@ -1,7 +1,7 @@
 {
   "name": "a2wtech",
   "version": "1.0.0",
-  "description": "a2wtech (App to Web Technologies) - Official Website",
+  "description": "A2WTech - A to W Digital Solutions",
   "type": "module",
   "scripts": {},
   "repository": {
@@ -11,11 +11,11 @@
   "keywords": [
     "a2wtech",
     "a2w-tech",
-    "app-to-web-technologies",
+    "a-to-w-tech",
     "web-development",
     "software"
   ],
-  "author": "a2wtech (App to Web Technologies)",
+  "author": "A2WTech",
   "license": "ISC",
   "dependencies": {
     "@vercel/analytics": "^2.0.1"

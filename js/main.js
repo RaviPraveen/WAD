@@ -1,5 +1,5 @@
 /**
- * A2WTech (App to Web Technologies) — Enterprise Software Development Portal
+ * A2WTech — Enterprise Software Development Portal
  * Core JavaScript Logic & Interactivity
  */
 
