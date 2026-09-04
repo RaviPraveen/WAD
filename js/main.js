@@ -559,7 +559,7 @@ function initContactForm() {
     const handleError = (errMsg) => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
-      showToast(errMsg || 'Failed to send inquiry. Please email wadev2026@gmail.com directly or contact WhatsApp at 078 925 2989.', 'error');
+      showToast(errMsg || 'Failed to send inquiry. Please email a2wtechinfo@gmail.com directly or contact WhatsApp at 078 925 2989.', 'error');
     };
 
     // Check if EmailJS credentials are provided
@@ -614,7 +614,7 @@ function initContactForm() {
           })
           .catch((err) => {
             console.error('EmailJS Error:', err);
-            handleError('Could not send via email service. Please email wadev2026@gmail.com');
+            handleError('Could not send via email service. Please email a2wtechinfo@gmail.com');
           });
       } catch (e) {
         console.error('EmailJS Init Exception:', e);
