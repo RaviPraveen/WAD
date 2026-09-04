@@ -1021,7 +1021,7 @@
                 </div>
 
                 <!-- What do you need? -->
-                <div class="form-group">
+                <div class="form-group full-width">
                   <label class="form-label" for="serviceNeeded">What do you need? <span class="required">*</span></label>
                   <select id="serviceNeeded" name="serviceNeeded" class="form-control" required>
                     <option value="" disabled selected>Select a Service</option>
@@ -1036,22 +1036,10 @@
                   <span class="form-error-msg"></span>
                 </div>
 
-                <!-- Estimated Budget -->
-                <div class="form-group">
-                  <label class="form-label" for="estimatedBudget">Estimated Budget Range</label>
-                  <select id="estimatedBudget" name="estimatedBudget" class="form-control">
-                    <option value="" selected>Flexible / Discuss with Team</option>
-                    <option value="tier-1">LKR 100,000 – 250,000 / &lt; $1,000</option>
-                    <option value="tier-2">LKR 250,000 – 600,000 / $1,000 – $2,500</option>
-                    <option value="tier-3">LKR 600,000 – 1,500,000 / $2,500 – $5,000</option>
-                    <option value="tier-4">LKR 1,500,000+ / $5,000+</option>
-                  </select>
-                </div>
-
-                <!-- Project Description -->
+                <!-- Project Description (Optional) -->
                 <div class="form-group full-width">
-                  <label class="form-label" for="projectDescription">Project Description <span class="required">*</span></label>
-                  <textarea id="projectDescription" name="projectDescription" class="form-control" placeholder="Briefly describe what your business needs, key features required, and any target deadlines..." required></textarea>
+                  <label class="form-label" for="projectDescription">Project Description</label>
+                  <textarea id="projectDescription" name="projectDescription" class="form-control" placeholder="Briefly describe what your business needs, any key features, or general questions (optional)..."></textarea>
                   <span class="form-error-msg"></span>
                 </div>
               </div>

@@ -517,8 +517,9 @@ function initContactForm() {
     /* EmailJS Configuration */
     const EMAILJS_CONFIG = {
       serviceID: 'service_WAD',
-      templateID: 'YOUR_TEMPLATE_ID', // Replace with your EmailJS Template ID (e.g. template_xxxxxxx)
-      publicKey: 'YOUR_PUBLIC_KEY'     // Replace with your EmailJS Public Key
+      templateID: 'template_7oio7rk',                     // Delivers all client details to you
+      autoReplyTemplateID: 'template_46kcyom',            // Sends instant auto-reply to client
+      publicKey: 'Cp7FgPBB8xXKg1KGE'                      // EmailJS Public Key
     };
 
     const submitBtn = form.querySelector('button[type="submit"]');
@@ -547,12 +548,12 @@ function initContactForm() {
       successBanner.innerHTML = `
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
         <div>
-          <strong>Inquiry Received!</strong> Thank you for reaching out to WAD Tech. Our team in Sri Lanka will review your project details and get back to you within 24 hours.
+          <strong>Message Received!</strong> We just received your mail. Thank you for reaching out to WAD Tech — we will reach you soon!
         </div>
       `;
       successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-      showToast('Thank you! Your project inquiry has been received. Our team in Sri Lanka will contact you shortly.', 'success');
+      showToast('We just received your mail! We will reach you soon.', 'success');
     };
 
     const handleError = (errMsg) => {
@@ -566,18 +567,51 @@ function initContactForm() {
       try {
         emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
         
+        const cName = form.clientName.value.trim();
+        const cEmail = form.clientEmail.value.trim();
+        const cPhone = form.clientPhone.value.trim();
+        const cService = form.serviceNeeded.options[form.serviceNeeded.selectedIndex].text;
+        const cCompany = (form.businessName && form.businessName.value.trim()) ? form.businessName.value.trim() : 'N/A';
+        const cDesc = (form.projectDescription && form.projectDescription.value.trim()) ? form.projectDescription.value.trim() : 'Not provided';
+
         const templateParams = {
-          client_name: form.clientName.value.trim(),
-          business_name: form.businessName.value.trim() || 'N/A',
-          client_email: form.clientEmail.value.trim(),
-          client_phone: form.clientPhone.value.trim(),
-          service_needed: form.serviceNeeded.options[form.serviceNeeded.selectedIndex].text,
-          budget: form.estimatedBudget.options[form.estimatedBudget.selectedIndex].text,
-          project_description: form.projectDescription.value.trim()
+          // Standard & custom keys so EmailJS matches any field name
+          client_name: cName,
+          name: cName,
+          from_name: cName,
+          to_name: cName,
+
+          client_email: cEmail,
+          email: cEmail,
+          to_email: cEmail,
+          reply_to: cEmail,
+
+          client_phone: cPhone,
+          phone: cPhone,
+
+          service_needed: cService,
+          service: cService,
+
+          budget: 'To be discussed',
+          business_name: cCompany,
+          company: cCompany,
+
+          project_description: cDesc,
+          message: cDesc
         };
 
+        // 1. Send inquiry email to WAD Tech
         emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
-          .then(() => handleSuccess())
+          .then(() => {
+            // 2. Also send client auto-reply if configured
+            if (EMAILJS_CONFIG.autoReplyTemplateID && EMAILJS_CONFIG.autoReplyTemplateID !== 'YOUR_AUTOREPLY_TEMPLATE_ID') {
+              emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.autoReplyTemplateID, templateParams)
+                .catch((autoReplyErr) => {
+                  console.warn('Auto-reply sending notice (check if "To Email" in auto-reply template is set to {{client_email}}):', autoReplyErr);
+                });
+            }
+            handleSuccess();
+          })
           .catch((err) => {
             console.error('EmailJS Error:', err);
             handleError('Could not send via email service. Please email hello@wadtech.lk');
