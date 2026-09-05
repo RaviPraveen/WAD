@@ -2086,6 +2086,11 @@ header[id] {
   user-select: none;
 }
 
+@keyframes swipeNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
 /* ---------------- TABLET SCREENS (max-width: 1024px) ---------------- */
 @media (max-width: 1024px) {
   :root {
@@ -2116,11 +2121,6 @@ header[id] {
     color: var(--primary);
   }
 
-  @keyframes swipeNudge {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-  }
-
   html {
     scroll-padding-top: 86px;
   }
@@ -2134,13 +2134,80 @@ header[id] {
     height: 66px;
   }
 
+  .nav-container {
+    padding: 0 20px;
+  }
+
   .brand-logo-img {
-    height: 32px;
-    max-width: 85px;
+    height: 30px;
+    max-width: 80px;
   }
 
   .brand-title {
-    font-size: 18px;
+    font-size: 17px;
+  }
+
+  .brand-sub {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .nav-links, .nav-actions .btn {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .mobile-nav-drawer {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    border-bottom: 2px solid rgba(2, 132, 199, 0.15);
+    padding: 18px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 16px 36px rgba(11, 21, 40, 0.14);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.28s ease, opacity 0.28s ease;
+    z-index: 999;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+  }
+
+  .mobile-nav-drawer.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-drawer .nav-link {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  .mobile-nav-drawer .btn {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    height: 46px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    justify-content: center;
   }
 
   .hero-section {
