@@ -352,7 +352,10 @@ window.inquireFromModal = function(projectName) {
 
   const contactSection = document.getElementById('contact');
   if (contactSection) {
-    contactSection.scrollIntoView({ behavior: 'smooth' });
+    const headerOffset = 70;
+    const elementPosition = contactSection.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
   }
 };
 
@@ -465,7 +468,10 @@ window.inquireService = function(serviceTitle) {
 
   const contactSection = document.getElementById('contact');
   if (contactSection) {
-    contactSection.scrollIntoView({ behavior: 'smooth' });
+    const headerOffset = 70;
+    const elementPosition = contactSection.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
   }
 };
 

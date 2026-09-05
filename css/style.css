@@ -2063,86 +2063,196 @@ textarea.form-control {
   color: var(--text-primary);
 }
 
-/* ---------------- Responsive Styles (Tablet & Mobile) ---------------- */
-@media (max-width: 1080px) {
+/* --------------------------------------------------------------------------
+   Master Responsive System (Tablets & Mobile Phones)
+   Engineered for clean typography, proportioned cards, and zero header overlap
+   -------------------------------------------------------------------------- */
+
+/* Section scroll margins so sticky header never cuts off section titles */
+section[id],
+.section[id],
+header[id] {
+  scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+/* ---------------- TABLET SCREENS (max-width: 1024px) ---------------- */
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 66px;
+    --container-pad: 20px;
+  }
+
+  html {
+    scroll-padding-top: 86px;
+  }
+
+  section[id],
+  .section[id] {
+    scroll-margin-top: 86px;
+  }
+
+  .site-header {
+    height: 66px;
+  }
+
+  .brand-logo-img {
+    height: 32px;
+    max-width: 85px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+  }
+
+  .hero-section {
+    padding-top: calc(var(--header-height) + 36px);
+    padding-bottom: 60px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
     text-align: center;
   }
+
   .hero-content {
-    max-width: 100%;
+    max-width: 640px;
     margin: 0 auto;
   }
+
+  .hero-title {
+    font-size: 2.3rem;
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
   .hero-ctas {
     justify-content: center;
   }
+
   .hero-trust-chips {
     justify-content: center;
   }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
   .trust-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
+
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
+
   .timeline-steps {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .timeline-line {
     display: none;
   }
+
   .process-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
+
   .tech-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
+
   .why-choose-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
   }
+
   .footer-top {
     grid-template-columns: 1fr 1fr;
+    gap: 36px;
   }
 }
 
+/* ---------------- MOBILE SCREENS (max-width: 768px) ---------------- */
 @media (max-width: 768px) {
-  /* Prevent horizontal scroll */
+  :root {
+    --header-height: 58px;
+    --container-pad: 16px;
+  }
+
   html, body {
     overflow-x: hidden;
   }
 
-  .section {
-    padding: 48px 0;
+  html {
+    scroll-padding-top: 74px;
   }
 
-  .section-header {
-    margin-bottom: 30px;
-    text-align: center;
+  section[id],
+  .section[id] {
+    scroll-margin-top: 74px;
   }
 
-  .section-title {
-    font-size: 1.65rem;
-    line-height: 1.25;
-    margin-bottom: 12px;
+  /* ---------------- HEADER & LOGO (Fixing Giant Mobile Header) ---------------- */
+  .site-header {
+    height: 58px;
   }
 
-  .section-desc {
-    font-size: 0.95rem;
-    line-height: 1.55;
+  .nav-container {
+    padding: 0 16px;
   }
 
-  /* Navigation & Mobile Drawer */
+  .brand-logo {
+    gap: 8px;
+  }
+
+  .brand-logo-img {
+    height: 25px;
+    width: auto;
+    max-width: 66px;
+  }
+
+  .brand-logo-text {
+    line-height: 1.1;
+  }
+
+  .brand-title {
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-sub {
+    font-size: 8px;
+    letter-spacing: 0.05em;
+  }
+
   .nav-links, .nav-actions .btn {
     display: none;
   }
 
   .mobile-toggle {
     display: flex;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
   }
 
   .mobile-nav-drawer {
@@ -2152,10 +2262,10 @@ textarea.form-control {
     right: 0;
     background: #FFFFFF;
     border-bottom: 2px solid rgba(2, 132, 199, 0.15);
-    padding: 20px 20px 28px;
+    padding: 16px 18px 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     box-shadow: 0 16px 36px rgba(11, 21, 40, 0.14);
     transform: translateY(-120%);
     opacity: 0;
@@ -2173,9 +2283,9 @@ textarea.form-control {
   }
 
   .mobile-nav-drawer .nav-link {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    padding: 12px 6px;
+    padding: 10px 4px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
   }
@@ -2183,20 +2293,24 @@ textarea.form-control {
   .mobile-nav-drawer .btn {
     display: flex;
     width: 100%;
-    margin-top: 10px;
-    padding: 14px 20px;
+    margin-top: 8px;
+    height: 44px;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    justify-content: center;
   }
 
-  /* ---------------- HERO SECTION MOBILE OPTIMIZATION ---------------- */
-  /* Remove heavy desktop image on mobile as requested */
+  /* ---------------- HERO SECTION (Fixing Giant Text & Hiding Heavy Image) ---------------- */
   .hero-visual,
   .hero-visual-wrapper {
     display: none !important;
   }
 
   .hero-section {
-    padding-top: calc(var(--header-height) + 24px);
-    padding-bottom: 36px;
+    padding-top: calc(var(--header-height) + 16px);
+    padding-bottom: 28px;
     text-align: center;
   }
 
@@ -2209,192 +2323,633 @@ textarea.form-control {
   .hero-content {
     max-width: 100%;
     margin: 0 auto;
+    padding: 0 4px;
     text-align: center;
   }
 
   .hero-badge {
-    font-size: 12px;
-    padding: 6px 14px;
-    margin-bottom: 16px;
+    font-size: 11px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+
+  .badge-pulse {
+    width: 6px;
+    height: 6px;
   }
 
   .hero-title {
-    font-size: 1.85rem;
-    line-height: 1.22;
+    font-size: 1.55rem; /* ~24px - proportional, reads in 3 clean lines */
+    line-height: 1.25;
     letter-spacing: -0.025em;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     text-align: center;
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    margin-bottom: 24px;
+    font-size: 13.5px; /* ~0.85rem - clean body text */
+    line-height: 1.55;
+    color: #475569;
+    max-width: 360px;
+    margin: 0 auto 20px;
     text-align: center;
+    font-weight: 400;
   }
 
   .hero-ctas {
     flex-direction: column;
     width: 100%;
-    gap: 12px;
-    margin-bottom: 26px;
+    gap: 10px;
+    margin-bottom: 22px;
   }
 
   .hero-ctas .btn {
     width: 100%;
-    padding: 13px 20px;
-    font-size: 15px;
+    height: 46px;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
     justify-content: center;
   }
 
   /* Sleek modern chips for hero tags */
   .hero-trust-chips {
     justify-content: center;
-    gap: 8px;
-    padding-top: 18px;
+    gap: 6px 8px;
+    padding-top: 16px;
     border-top: 1px solid var(--border-color);
   }
 
   .hero-trust-item {
-    font-size: 12px;
-    padding: 5px 12px;
-    background: rgba(2, 132, 199, 0.08);
-    border: 1px solid rgba(2, 132, 199, 0.18);
+    font-size: 11px;
+    padding: 4px 10px;
+    background: rgba(2, 132, 199, 0.07);
+    border: 1px solid rgba(2, 132, 199, 0.16);
     border-radius: 999px;
     color: var(--primary);
     font-weight: 600;
   }
 
-  .hero-trust-item .bullet-dot {
+  .hero-trust-item .bullet-dot,
+  .hero-trust-item svg {
     display: none;
   }
 
-  /* ---------------- METRICS STRIP MOBILE ---------------- */
+  /* ---------------- METRICS STRIP (Compact & Proportional) ---------------- */
   .metrics-banner-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 20px 18px;
-    margin-top: 8px;
+    gap: 10px;
+    padding: 14px 16px;
+    margin-top: 4px;
+    border-radius: 14px;
   }
 
   .metric-item {
-    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
   }
 
   .metric-item:not(:last-child) {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    padding-right: 0;
-    padding-bottom: 16px;
+    padding-bottom: 10px;
+  }
+
+  .metric-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
   }
 
   .metric-number {
-    font-size: 28px;
+    font-size: 22px;
+    line-height: 1.1;
+  }
+
+  .metric-title {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .metric-desc {
+    font-size: 11.5px;
+    color: var(--text-muted);
   }
 
   .floating-stat-card {
     display: none !important;
   }
 
-  /* ---------------- SECTION GRIDS MOBILE ---------------- */
-  .trust-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  /* ---------------- SECTION HEADERS (Balanced Typography) ---------------- */
+  .section {
+    padding: 42px 0;
   }
 
+  .section-header {
+    margin-bottom: 24px;
+    text-align: center;
+    padding: 0 8px;
+  }
+
+  .badge-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: 1.45rem; /* ~23px */
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .section-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  /* ---------------- SERVICES CARDS ---------------- */
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 14px;
   }
 
   .service-card {
-    padding: 22px 18px;
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .service-header {
+    margin-bottom: 12px;
+  }
+
+  .service-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .service-icon-box svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .service-badge {
+    font-size: 11px;
+    padding: 3px 8px;
   }
 
   .service-title {
-    font-size: 1.25rem;
+    font-size: 17px;
+    margin-bottom: 6px;
   }
 
   .service-desc {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 12px;
   }
 
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .service-features-list {
+    gap: 6px;
+    margin-bottom: 14px;
   }
 
-  .timeline-steps {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .service-feature-item {
+    font-size: 12.5px;
+    gap: 8px;
   }
 
+  .service-feature-item svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .btn-learn-more {
+    font-size: 13px;
+    padding: 4px 0;
+  }
+
+  /* ---------------- HOW WE WORK (Fixing Giant 01 Process Blocks) ---------------- */
   .process-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 10px;
+    margin-top: 18px;
   }
 
-  .tech-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .industries-grid {
-    grid-template-columns: 1fr;
+  .process-card {
+    padding: 14px 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 14px;
+  }
+
+  .process-number {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid rgba(15, 82, 186, 0.18);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .process-name {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .process-desc {
+    font-size: 12.5px;
+    line-height: 1.48;
+    color: var(--text-secondary);
+  }
+
+  /* ---------------- SOLUTIONS FOR BUSINESSES (2-Column Mobile App Grid) ---------------- */
+  .industries-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .industry-card {
+    padding: 14px 10px;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .industry-icon-box {
+    width: 34px;
+    height: 34px;
+    margin: 0 auto 8px;
+    border-radius: 8px;
+  }
+
+  .industry-title {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .industry-desc {
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+
+  /* ---------------- WHY CHOOSE US & TRUST CARDS ---------------- */
+  .why-choose-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .why-choose-left {
+    text-align: center;
+  }
+
+  .why-choose-left .section-title {
+    text-align: center;
+  }
+
+  .why-choose-left .section-desc {
+    margin: 0 auto 16px;
   }
 
   .why-choose-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 8px;
   }
 
-  .contact-grid {
+  .why-item {
+    padding: 11px 13px;
+    border-radius: 10px;
+    gap: 10px;
+  }
+
+  .why-item-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .why-item h4 {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .why-item p {
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+
+  .trust-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 12px;
   }
 
-  .contact-info-card,
-  .contact-form-card {
-    padding: 24px 18px;
+  .trust-card {
+    padding: 16px 14px;
+    border-radius: 12px;
   }
 
-  .form-grid {
+  .trust-card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .trust-card-title {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .trust-card-desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  /* ---------------- PROJECTS SECTION ---------------- */
+  .projects-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 16px; /* Prevents unwanted auto-zoom on iOS */
+  .project-card {
+    border-radius: 14px;
   }
 
-  .footer-top {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .project-content {
+    padding: 16px 14px;
   }
 
+  .project-title {
+    font-size: 17px;
+  }
+
+  .project-desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  /* ---------------- CTA BANNER ---------------- */
   .cta-banner-wrapper {
-    padding: 36px 20px;
+    padding: 28px 18px;
+    border-radius: 16px;
     text-align: center;
   }
 
   .cta-banner-title {
-    font-size: 1.7rem;
-    margin-bottom: 12px;
+    font-size: 1.45rem;
+    margin-bottom: 8px;
+  }
+
+  .cta-banner-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 18px;
   }
 
   .cta-banner-actions {
     flex-direction: column;
     width: 100%;
-    gap: 12px;
+    gap: 10px;
   }
 
   .cta-banner-actions .btn {
     width: 100%;
+    height: 44px;
+    font-size: 14px;
+    border-radius: 8px;
     justify-content: center;
+  }
+
+  /* ---------------- FAQ ACCORDIONS (Fixing Screenshot 2 Massive Blocks) ---------------- */
+  .faq-container {
+    gap: 8px;
+  }
+
+  .faq-item {
+    border-radius: 10px;
+  }
+
+  .faq-header {
+    padding: 13px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    gap: 12px;
+    line-height: 1.35;
+  }
+
+  .faq-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .faq-icon svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .faq-content {
+    padding: 0 14px 14px;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  .faq-item.active .faq-content {
+    padding-top: 8px;
+  }
+
+  /* ---------------- CONTACT SECTION (Fixing Screenshot 3 Overlapping & Big Inputs) ---------------- */
+  .contact-section {
+    padding-top: 44px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .contact-info-card {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .contact-info-title {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .contact-info-desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .contact-methods {
+    gap: 8px;
+  }
+
+  .contact-method-item {
+    padding: 10px 12px;
+    border-radius: 10px;
+    gap: 12px;
+  }
+
+  .contact-method-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .contact-method-label {
+    font-size: 11px;
+  }
+
+  .contact-method-value {
+    font-size: 12.5px;
+  }
+
+  .contact-form-card {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .contact-form-title {
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  .contact-form-sub {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .form-group input,
+  .form-group select {
+    height: 42px;
+    padding: 8px 12px;
+    font-size: 15px; /* iOS friendly */
+    border-radius: 8px;
+  }
+
+  .form-group textarea {
+    height: 80px;
+    padding: 10px 12px;
+    font-size: 15px;
+    border-radius: 8px;
+  }
+
+  .btn-submit-form {
+    height: 46px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-top: 4px;
+  }
+
+  /* ---------------- FOOTER MOBILE ---------------- */
+  .site-footer {
+    padding-top: 40px;
+    padding-bottom: 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-logo-img {
+    height: 30px;
+    max-width: 80px;
+  }
+
+  .footer-brand-desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .footer-col-title {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .footer-links a,
+  .footer-contact-item {
+    font-size: 13px;
+  }
+
+  .footer-contact-item svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .footer-bottom {
+    margin-top: 30px;
+    padding-top: 20px;
+    font-size: 11.5px;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+/* ---------------- EXTRA COMPACT PHONES (max-width: 480px) ---------------- */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.45rem;
+  }
+
+  .section-title {
+    font-size: 1.35rem;
+  }
+
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .industry-card {
+    padding: 12px 8px;
+  }
+
+  .industry-title {
+    font-size: 12px;
+  }
+
+  .industry-desc {
+    font-size: 11px;
   }
 }
