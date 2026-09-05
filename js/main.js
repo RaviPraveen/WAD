@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initServiceModal();
   initContactForm();
   initScrollAnimations();
+  initSideScrollDrag();
 });
 
 /* ---------------- Sticky Header Scroll Effect ---------------- */
@@ -684,6 +685,10 @@ function initScrollAnimations() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
+        // If this is a side-scrolling container, also reveal all its child cards
+        if (entry.target.matches('.services-grid, .process-grid, .industries-grid, .trust-grid, .metrics-banner-grid')) {
+          entry.target.querySelectorAll('.reveal-on-scroll').forEach(child => child.classList.add('revealed'));
+        }
         obs.unobserve(entry.target);
       }
     });
@@ -693,4 +698,47 @@ function initScrollAnimations() {
   });
 
   elements.forEach(el => observer.observe(el));
+}
+
+/* ---------------- Side-Scroll Mouse Drag & Touch Enhancement ---------------- */
+function initSideScrollDrag() {
+  const scrollers = document.querySelectorAll('.services-grid, .process-grid, .industries-grid, .trust-grid, .metrics-banner-grid');
+  
+  scrollers.forEach(slider => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let hasMoved = false;
+
+    slider.addEventListener('mousedown', (e) => {
+      // Don't trigger drag on interactive form controls or links
+      if (e.target.closest('input, select, textarea, button, a')) return;
+      isDown = true;
+      hasMoved = false;
+      slider.classList.add('active-dragging');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active-dragging');
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active-dragging');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) {
+        hasMoved = true;
+      }
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  });
 }

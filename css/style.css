@@ -2075,11 +2075,50 @@ header[id] {
   scroll-margin-top: calc(var(--header-height) + 20px);
 }
 
+/* Side-scroll swipe hint badge (hidden on desktop, active on touch screens) */
+.swipe-hint-badge {
+  display: none;
+}
+
+.active-dragging {
+  cursor: grabbing !important;
+  cursor: -webkit-grabbing !important;
+  user-select: none;
+}
+
 /* ---------------- TABLET SCREENS (max-width: 1024px) ---------------- */
 @media (max-width: 1024px) {
   :root {
     --header-height: 66px;
     --container-pad: 20px;
+  }
+
+  .swipe-hint-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    background: rgba(15, 82, 186, 0.08);
+    border: 1px solid rgba(15, 82, 186, 0.2);
+    padding: 4px 12px;
+    border-radius: 999px;
+    animation: swipeNudge 2.2s ease-in-out infinite;
+  }
+
+  .swipe-hint-badge svg {
+    width: 12px;
+    height: 12px;
+    color: var(--primary);
+  }
+
+  @keyframes swipeNudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
   }
 
   html {
@@ -2148,19 +2187,86 @@ header[id] {
     font-size: 2rem;
   }
 
+  /* Side-scroll containers for tablet screens */
+  .services-grid,
+  .process-grid,
+  .industries-grid,
   .trust-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    margin-left: calc(-1 * var(--container-pad));
+    margin-right: calc(-1 * var(--container-pad));
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+    padding-bottom: 20px;
+    padding-top: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #0284C7 rgba(226, 232, 240, 0.8);
   }
 
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .services-grid::-webkit-scrollbar,
+  .process-grid::-webkit-scrollbar,
+  .industries-grid::-webkit-scrollbar,
+  .trust-grid::-webkit-scrollbar {
+    height: 5px;
   }
 
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+  .services-grid::-webkit-scrollbar-track,
+  .process-grid::-webkit-scrollbar-track,
+  .industries-grid::-webkit-scrollbar-track,
+  .trust-grid::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 999px;
+    margin: 0 var(--container-pad);
+  }
+
+  .services-grid::-webkit-scrollbar-thumb,
+  .process-grid::-webkit-scrollbar-thumb,
+  .industries-grid::-webkit-scrollbar-thumb,
+  .trust-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #0F52BA, #0284C7);
+    border-radius: 999px;
+  }
+
+  .services-grid .service-card {
+    flex: 0 0 44%;
+    min-width: 320px;
+    max-width: 390px;
+    scroll-snap-align: start;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .process-grid .process-card {
+    flex: 0 0 38%;
+    min-width: 280px;
+    max-width: 340px;
+    scroll-snap-align: start;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .industries-grid .industry-card {
+    flex: 0 0 30%;
+    min-width: 220px;
+    max-width: 270px;
+    scroll-snap-align: start;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .trust-grid .trust-card {
+    flex: 0 0 44%;
+    min-width: 320px;
+    max-width: 390px;
+    scroll-snap-align: start;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .timeline-steps {
@@ -2169,11 +2275,6 @@ header[id] {
 
   .timeline-line {
     display: none;
-  }
-
-  .process-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
   }
 
   .tech-grid {
@@ -2397,37 +2498,57 @@ header[id] {
     display: none;
   }
 
-  /* ---------------- METRICS STRIP (Compact & Proportional) ---------------- */
+  /* ---------------- METRICS STRIP (Horizontal Swipe Carousel) ---------------- */
   .metrics-banner-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 14px 16px;
-    margin-top: 4px;
-    border-radius: 14px;
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    gap: 12px;
+    padding: 12px var(--container-pad);
+    margin: 4px calc(-1 * var(--container-pad)) 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    background: #FFFFFF;
+    scrollbar-width: none;
+  }
+
+  .metrics-banner-grid::-webkit-scrollbar {
+    display: none;
   }
 
   .metric-item {
+    flex: 0 0 76vw;
+    min-width: 250px;
+    max-width: 280px;
+    scroll-snap-align: start;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 6px 0;
+    padding: 10px 14px;
+    background: #F8FAFC;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
   }
 
   .metric-item:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: none;
     padding-bottom: 10px;
   }
 
   .metric-icon-wrap {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 10px;
     flex-shrink: 0;
   }
 
   .metric-number {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.1;
   }
 
@@ -2477,15 +2598,54 @@ header[id] {
     margin: 0 auto;
   }
 
-  /* ---------------- SERVICES CARDS ---------------- */
+  /* ---------------- SERVICES CARDS (Native Side-Scroll Carousel) ---------------- */
   .services-grid {
-    grid-template-columns: 1fr;
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
     gap: 14px;
+    margin-left: calc(-1 * var(--container-pad));
+    margin-right: calc(-1 * var(--container-pad));
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+    padding-bottom: 18px;
+    padding-top: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #0284C7 rgba(226, 232, 240, 0.8);
   }
 
-  .service-card {
-    padding: 18px 16px;
+  .services-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .services-grid::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 999px;
+    margin: 0 var(--container-pad);
+  }
+
+  .services-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #0F52BA, #0284C7);
+    border-radius: 999px;
+  }
+
+  .services-grid .service-card {
+    flex: 0 0 82vw;
+    min-width: 270px;
+    max-width: 320px;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    padding: 20px 18px;
     border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .service-header {
@@ -2539,20 +2699,54 @@ header[id] {
     padding: 4px 0;
   }
 
-  /* ---------------- HOW WE WORK (Fixing Giant 01 Process Blocks) ---------------- */
+  /* ---------------- HOW WE WORK (Step-by-Step Side-Scroll Carousel) ---------------- */
   .process-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 18px;
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    gap: 12px;
+    margin-left: calc(-1 * var(--container-pad));
+    margin-right: calc(-1 * var(--container-pad));
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+    padding-bottom: 18px;
+    padding-top: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #0284C7 rgba(226, 232, 240, 0.8);
   }
 
-  .process-card {
-    padding: 14px 16px;
-    border-radius: 12px;
+  .process-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .process-grid::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 999px;
+    margin: 0 var(--container-pad);
+  }
+
+  .process-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #0F52BA, #0284C7);
+    border-radius: 999px;
+  }
+
+  .process-grid .process-card {
+    flex: 0 0 78vw;
+    min-width: 260px;
+    max-width: 300px;
+    scroll-snap-align: start;
+    padding: 18px 16px;
+    border-radius: 14px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 12px;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .process-number {
@@ -2583,27 +2777,62 @@ header[id] {
     color: var(--text-secondary);
   }
 
-  /* ---------------- SOLUTIONS FOR BUSINESSES (2-Column Mobile App Grid) ---------------- */
+  /* ---------------- SOLUTIONS FOR BUSINESSES (Side-Scroll Carousel) ---------------- */
   .industries-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    gap: 12px;
+    margin-left: calc(-1 * var(--container-pad));
+    margin-right: calc(-1 * var(--container-pad));
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+    padding-bottom: 18px;
+    padding-top: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #0284C7 rgba(226, 232, 240, 0.8);
   }
 
-  .industry-card {
-    padding: 14px 10px;
+  .industries-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .industries-grid::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 999px;
+    margin: 0 var(--container-pad);
+  }
+
+  .industries-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #0F52BA, #0284C7);
+    border-radius: 999px;
+  }
+
+  .industries-grid .industry-card {
+    flex: 0 0 68vw;
+    min-width: 220px;
+    max-width: 260px;
+    scroll-snap-align: start;
+    padding: 16px 14px;
     border-radius: 12px;
     text-align: center;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .industry-icon-box {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     margin: 0 auto 8px;
     border-radius: 8px;
   }
 
   .industry-title {
-    font-size: 13px;
+    font-size: 13.5px;
     margin-bottom: 4px;
   }
 
@@ -2632,40 +2861,79 @@ header[id] {
 
   .why-choose-grid {
     grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .why-item {
-    padding: 11px 13px;
-    border-radius: 10px;
     gap: 10px;
   }
 
-  .why-item-icon {
-    width: 26px;
-    height: 26px;
-    border-radius: 6px;
-    flex-shrink: 0;
-  }
-
-  .why-item h4 {
-    font-size: 13px;
-    margin-bottom: 2px;
-  }
-
-  .why-item p {
-    font-size: 11.5px;
-    line-height: 1.4;
-  }
-
-  .trust-grid {
-    grid-template-columns: 1fr;
+  .why-point-card {
+    padding: 12px 14px;
+    border-radius: 12px;
     gap: 12px;
   }
 
-  .trust-card {
-    padding: 16px 14px;
-    border-radius: 12px;
+  .why-check-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .why-check-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .why-point-content h4 {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .why-point-content p {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* ---------------- TRUST CARDS (Side-Scroll Carousel) ---------------- */
+  .trust-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    gap: 12px;
+    margin-left: calc(-1 * var(--container-pad));
+    margin-right: calc(-1 * var(--container-pad));
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+    padding-bottom: 18px;
+    padding-top: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #0284C7 rgba(226, 232, 240, 0.8);
+  }
+
+  .trust-grid::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .trust-grid::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 999px;
+    margin: 0 var(--container-pad);
+  }
+
+  .trust-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #0F52BA, #0284C7);
+    border-radius: 999px;
+  }
+
+  .trust-grid .trust-card {
+    flex: 0 0 80vw;
+    min-width: 260px;
+    max-width: 300px;
+    scroll-snap-align: start;
+    padding: 18px 16px;
+    border-radius: 14px;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .trust-card-icon {
